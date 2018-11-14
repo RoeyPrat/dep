@@ -17,12 +17,6 @@ DATE=$(date "+%Y-%m-%d")
 BUILD_PLATFORM=$(uname -a | awk '{print tolower($1);}')
 IMPORT_DURING_SOLVE=${IMPORT_DURING_SOLVE:-false}
 
-if [[ "$(pwd)" != "${DEP_ROOT}" ]]; then
-  echo "you are not in the root of the repo" 1>&2
-  echo "please cd to ${DEP_ROOT} before running this script" 1>&2
-  exit 1
-fi
-
 GO_BUILD_CMD="go build -a -installsuffix cgo"
 GO_BUILD_LDFLAGS="-s -w -X main.commitHash=${COMMIT_HASH} -X main.buildDate=${DATE} -X main.version=${VERSION} -X main.flagImportDuringSolve=${IMPORT_DURING_SOLVE}"
 
